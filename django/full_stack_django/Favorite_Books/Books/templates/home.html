@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Favorite Books </title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+
+        <p style="text-align: right;">Welcome {{User.firstname}}! <a href="logout"> Log off </a> </p>
+    </div>
+    <hr>
+    <form action="AddBook" method="POST">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 login-form-1">
+                    <div class="form-group" style="width: 290px;">
+                        <label for="Title">Title:</label>
+                        <input type="text" class="form-control" name="title">
+                    </div>
+
+                    <div class="form-group" style="width: 290px;">
+                        <label for="descrption">Descrption:</label>
+                        <input type="text" class="form-control" name="descrption">
+                    </div>
+                    <button class="bg-info text-white"> Add Book </button>
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+
+                </div>
+    </form>
+    <div class="col-md-6 login-form-2">
+        <h3> All Books </h3>
+        {% for book in books %}
+        <h4> <a href="/books/{{book.id}}"> {{book.title}} </a> </h4>
+        Added By {{book.uplouded_By.firstname}} {{book.uplouded_By.lastname}}
+        
+        {% for userbook in User.liked_books.all %}
+            {% if userbook.id ==  book.id %}
+            <p>this is one of your favorites</p>
+        
+            {% endif %}
+        {% endfor %}    
+
+        <form action="/{{book.id}}/add_to_Favorite" method="post">
+            {% csrf_token %}
+            <input type="hidden"  value="{{book.id}}">
+            <button class="btn btn-link">Add to Favorite</button>
+        </form>
+        
+
+{% endfor %}
+
+    </div>
+    </div>
+    </div>
+</body>
+
+</html>

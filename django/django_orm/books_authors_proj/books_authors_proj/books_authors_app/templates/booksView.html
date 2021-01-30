@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books & Authors </title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div id=add>
+    </div>
+    <div>
+        <h1> {{Books.title}} </h1>
+        <p>{{Books.desc}} </p>
+        <p>{{Books.id}} </p>
+
+        <h1>Authors:</h1>
+        {% for author in Books.authors.all %}
+        <p>{{author.first_name}} {{author.last_name}}</p>
+        {%endfor%}
+        <form action="{{Books.id}}/AuthorToAbook" method="POST">
+            {% csrf_token %}
+            <select name="Authors_name">
+                {% for Author in Authors %}
+                <option value="{{Author.id}}">{{Author.first_name}} {{Author.last_name}} </option>
+                {% endfor %}
+            </select>
+            <button> Add </button>
+        </form>
+    </div>
+</body>
+
+</html>

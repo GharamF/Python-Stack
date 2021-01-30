@@ -1,0 +1,39 @@
+h1{
+  text-align: center;
+  font-family: monospace;
+}
+table {
+  font-family: monospace;
+  width: 60%;
+  margin-left: 20%;
+  }
+
+#heading th{
+    background-color: gray;
+  }
+
+  
+  table th {
+    
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: lightgrey;
+    color: black;
+    border: 1px solid #ddd;
+  }
+  div p {
+    text-align: center;
+  font-family: monospace;
+  } 
+  div button {
+    margin-left: 50%;
+  }
+  input[type=text],  input[type=number] {
+    margin: 5px 10px 0px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  

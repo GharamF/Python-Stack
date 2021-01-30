@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Favorite Books </title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+
+        <p> <a href="/books"> Return </a> </p>
+        <p style="text-align: right;">Welcome {{user.firstname}}! <a href="/logout"> Log off </a> </p>
+    </div>
+    <hr>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 login-form-1">
+                <form action="/books/{{book.id}}/update" method="post">
+                    {% csrf_token %}
+                    <label for="Title">Title:</label>
+                    
+                    {% if book.uplouded_By.id == user.id %}
+                    <div class="form-group" style="width: 290px;">
+                        <input type="text" value="{{book.title}}" placeholder="{{book.title}}" class="form-control" name="title">
+                    </div>
+                    {%else%}
+                    <h2> {{book.title}} </h2>
+                    {%endif%}
+                    <p> Added By : {{book.uplouded_By.firstname}} {{book.uplouded_By.lastname}}</p>
+                    <p>Added on: {{book.created_at}} </p>
+                    <p> updated at : {{book.updated_at}}</p>
+
+
+                    {% if book.uplouded_By.id == user.id %}
+                    <div class="form-group" style="width: 290px;">
+                        <label for="Title">Descrption:</label>
+                        <input type="text" value="{{book.desc}}"  placeholder="{{book.desc}}" 
+                        class="form-control" name="descrption">
+                        <button class="btn btn-link"> Update </button>  
+                         </div>
+                {%else%}
+                <p> {{book.desc}} </p>
+                {%endif%}   
+                </form>
+                
+                <form action="/books/{{book.id}}/delete" method="post">
+                    {% csrf_token %}
+                <button class="btn btn-link"> delete </button>
+                </form>
+
+                
+
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            </div>
+
+
+
+            <div class="col-md-6 login-form-2">
+                <h1> User Who Like This Book </h1>
+                {%for User in book.users_who_like.all %}
+                {% if user.id == User.id %}
+                <form action="/books/{{book.id}}/remove_favorite" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{User.id}}">
+                    <li> {{User.firstname}} {{User.lastname}}
+                        <button class="btn btn-link"> Remove From Favorite</button></li>
+                </form>
+                {% else%}
+                <li>{{User.firstname}} {{User.lastname}}</li>
+
+                {% endif %}
+                {%endfor%}
+
+
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

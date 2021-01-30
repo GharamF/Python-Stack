@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create </title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div>
+        <form action="add_show" method="POST">
+            {% csrf_token %}
+            <h1> Add A New Show   </h1>
+            <p>Title :<input name="title" type="text"> </p>
+            <p>Network : <input name="network" type="text"></p>
+            <p>Release Date : <input name="releasedate" type="date"></p>
+            <p>Descrption: <input name="descrption" type="TextField"></p>
+                <button> Add </button></p>
+                {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %}    
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <p>   <a href="/" > Go Back </a> </p>
+
+
+        </form>
+    </div>
+</body>
+
+</html>

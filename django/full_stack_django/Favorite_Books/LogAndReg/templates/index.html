@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    
+</head>
+
+<body>
+    <div class="container login-container">
+        <div class="row">
+            <div class="col-md-6 login-form-1">
+                <h1> Registration </h1>
+                <form action="/check" method="POST">
+                    <input type="hidden" name="form" value="new_user" />
+                    {% csrf_token %}
+                    <div class="form-group" style="width: 290px;">
+                        <label for="pwd">First Name:</label>
+                        <input type="text" class="form-control" name="first_name">
+                    </div>
+                    <div class="form-group" style="width: 290px;">
+                        <label for="text">Last Name :</label>
+                        <input type="text" class="form-control" name="last_name">
+                    </div>
+                    <div class="form-group" style="width: 290px;">
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" name="email">
+                    </div>
+                    <div class="form-group" style="width: 290px;">
+                        <label for="pwd">Password:</label>
+                        <input type="password" class="form-control" name="password">
+                    </div>
+                    <div class="form-group" style="width: 290px;">
+                        <label for="pwd"> confirm Password:</label>
+                        <input type="password" class="form-control" name="repassword">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+
+        <div class="col-md-6 login-form-2">
+            <h1> Login </h1>
+            <form action="/check" method="POST">
+                <input type="hidden" name="form" value="login" />
+                {% csrf_token %}
+                <div class="form-group" style="width: 290px;">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" name="e-mail">
+                </div>
+                <div class="form-group" style="width: 290px;">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" name="pass">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

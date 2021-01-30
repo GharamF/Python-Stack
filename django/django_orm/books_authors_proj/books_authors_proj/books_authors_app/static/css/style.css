@@ -1,0 +1,36 @@
+
+p{
+    font-family: 'Lucida Sans';
+}
+    table {
+        font-family: 'Lucida Sans';
+        width: 20%;
+        margin-left: 60%;
+        margin-top: -180px;
+        }
+    
+    #heading th{
+        background-color: gray;
+        }
+    
+        
+        table th {
+        
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: lightgrey;
+        color: black;
+        border: 1px solid #ddd;
+        }
+    button {
+        margin-left: 10%;
+    }
+    input[type=text],  input[type=number] {
+        margin: 5px 10px 0px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    

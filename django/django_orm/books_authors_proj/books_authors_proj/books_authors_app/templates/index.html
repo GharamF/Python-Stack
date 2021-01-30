@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books & Authors </title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div id=add>
+    <form action="addBook" method="POST">
+        {% csrf_token %}
+        <h1> Add A Book </h1>
+        <p> Title :<input name="title" type="text"> </p>
+        <p>Descrption : <input name="desc" type="text"></p>
+        <button> Add </button></p>
+    </form>
+</div>
+    <div>
+        <table>
+            <tr id='heading'>
+                <th> ID </th>
+                <th> Title </th>
+                <th> Descrption </th>
+                <th>   Action </th>
+                {% for Books_id in Books %}
+                <tr>
+                    <th>{{Books_id.id}}</th>
+                <th>{{Books_id.title}}</th>
+                <th>{{Books_id.desc}}</th>
+                <th><a href="books/{{Books_id.id}}">   View  </a></th>
+            </tr>{% endfor %}
+        </table>
+        
+
+    </div>
+</body>
+
+</html>

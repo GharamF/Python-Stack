@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <style>
+        h1,
+        p {
+            text-align: center;
+            font-size: 50px;
+            font-family: Calibri
+        }
+
+        button {
+            height: 20px ;
+            width: 130px;
+            margin-left: 480px;
+            font-family: Calibri
+        }
+    </style>
+</head>
+
+<body>
+    <h1> Counter </h1>
+    <p style="font-size: 30px;"> {{ counter }} times.</p>
+    <form action='destroy_session' method='POST'>
+        {% csrf_token %}
+        <button name="reset-btn"> Reset </button>
+    </form>
+
+    <form action='add_two' method='POST'>
+        {% csrf_token %}
+        <button name="increment2-btn"> increment by 2 </button>
+    </form>
+
+    <form action="increment_by" method="POST">
+        {% csrf_token %}
+        <p style="font-size: 30px;" > Number to increment : <input name="num"  type="number"></p>
+        <button name="increment-btn"> increment </button>
+    </form>
+</body>
+
+</html>

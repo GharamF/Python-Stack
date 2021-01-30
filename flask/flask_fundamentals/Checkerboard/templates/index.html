@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>checkerboard</title>
+    <style>
+        table tr td {
+            height: 90px;
+            width: 90px;
+        }
+
+        .color1 {
+            background-color: red;
+        }
+
+        .color2 {
+            background-color: black;
+        }
+    </style>
+
+</head>
+
+<body>
+    <table>
+        
+    {% for x in range(row): %}
+        <tr>
+            {% for i in range (colum): %}
+            <td class="color1"  style="background-color:{{ color1 }} ;"  ></td>
+            <td class="color2"  style="background-color:{{ color2 }} ;" ></td>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for i in range (colum): %}
+            <td class="color2"  style="background-color:{{ color2 }} ;"></td>
+            <td class="color1"  style="background-color:{{ color1 }} ;"></td>
+            {% endfor %}
+        </tr>
+            
+    {% endfor %}
+    </table>
+</body>
+
+</html>
